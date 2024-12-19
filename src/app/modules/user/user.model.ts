@@ -2,6 +2,7 @@ import { model, Schema, Types } from "mongoose";
 import { TFullName, TUser, UserModel } from "./user.interface";
 import bcrypt from "bcrypt";
 import config from "../../config";
+import { userRole } from "./user.constant";
 
 const fullNameSchema = new Schema<TFullName>({
   firstName: {
@@ -48,7 +49,7 @@ const userSchema = new Schema<TUser, UserModel>(
     },
     role: {
       type: String,
-      enum: ["admin", "user"],
+      enum: userRole,
       default: "user",
     },
   },
