@@ -1,0 +1,19 @@
+import express, { Express, Request, Response } from "express";
+import cors from "cors";
+import notFound from "./app/middlewares/notFound";
+import { UserRoute } from "./app/modules/user/user.route";
+import { BlogRoute } from "./app/modules/blog/blog.route";
+
+const app: Express = express();
+//parser
+app.use(express.json());
+app.use(cors());
+
+app.use("/api/auth", UserRoute);
+app.use("/api/auth", BlogRoute);
+app.get("/", (req: Request, res: Response) => {
+  res.send("Express + TypeScript Server");
+});
+
+app.use(notFound);
+export default app;
