@@ -73,6 +73,19 @@ userSchema.post("save", function (doc, next) {
 
 //checking is user exist
 userSchema.statics.isUserExistsById = async function (id: Types.ObjectId) {
-  return await User.findById(id).select("+password");
+  return await User.findById(id);
+};
+userSchema.statics.isUserExistsByEmail = async function (email: string) {
+  return await User.findOne({ email }).select("+password");
+};
+userSchema.statics.isUserBlocked = async function (email: string) {
+  const user = await User.findOne({ email });
+  return user?.isBlocked;
+};
+userSchema.statics.isPasswordMatched = async function (
+  plaintextPassword,
+  hashPassword
+) {
+  return bcrypt.compare(plaintextPassword, hashPassword);
 };
 export const User = model<TUser, UserModel>("User", userSchema);
