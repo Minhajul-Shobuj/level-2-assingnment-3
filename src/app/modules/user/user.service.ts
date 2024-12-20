@@ -7,23 +7,6 @@ const createUserInDB = async (payload: TUser) => {
   return result;
 };
 
-const blockUserInDB = async (userId: string, isBlocked: boolean) => {
-  if (!mongoose.Types.ObjectId.isValid(userId)) {
-    throw new Error("Invalid user ID");
-  }
-  const result = await User.findOneAndUpdate(
-    { _id: userId },
-    { isBlocked },
-    { new: true, runValidators: true }
-  );
-
-  if (!result) {
-    throw new Error("User not found");
-  }
-  return result;
-};
-
 export const UserService = {
   createUserInDB,
-  blockUserInDB,
 };

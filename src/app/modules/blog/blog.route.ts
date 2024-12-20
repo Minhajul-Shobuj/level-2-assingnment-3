@@ -8,8 +8,8 @@ import { USER_ROLE } from "../user/user.constant";
 const router = express.Router();
 
 router.post(
-  "/create",
-  auth(USER_ROLE.user),
+  "/",
+  auth(USER_ROLE.user, USER_ROLE.admin),
   validateRequest(BlogValidation.blogSchemaValidation),
   BlogController.createBlog
 );

@@ -12,11 +12,5 @@ router.post(
   validateRequest(UserValidation.userSchemaValidation),
   UserController.createUser
 );
-router.patch(
-  "/:userId/block",
-  auth(USER_ROLE.admin),
-  validateRequest(UserValidation.blockUserValidation),
-  UserController.blockUser
-);
 
 export const UserRoute = router;

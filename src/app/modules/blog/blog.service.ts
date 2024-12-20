@@ -9,9 +9,11 @@ const createBlogInDB = async (payload: TBlog) => {
   if (!author) {
     throw new AppError(httpStatus.NOT_FOUND, "Author is not valid");
   }
-  const result = await Blog.create(payload);
+  const result = (await Blog.create(payload)).populate("author");
   return result;
 };
+const updateBlogInDb = async (id: string, payload: Partial<TBlog>) => {};
+//----------
 const deleteBlogFromDb = async (id: string) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     throw new Error("Invalid blog ID");
@@ -27,4 +29,5 @@ const deleteBlogFromDb = async (id: string) => {
 export const BlogService = {
   createBlogInDB,
   deleteBlogFromDb,
+  updateBlogInDb,
 };
