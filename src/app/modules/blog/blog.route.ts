@@ -13,6 +13,7 @@ router.post(
   validateRequest(BlogValidation.blogSchemaValidation),
   BlogController.createBlog,
 )
+router.get('/', BlogController.getAllBlogs)
 router.patch(
   '/:id',
   auth(USER_ROLE.user),

@@ -16,6 +16,15 @@ const createBlog: RequestHandler = catchAsync(async (req, res) => {
     message: 'Successfully Posted a Blog',
   })
 })
+const getAllBlogs: RequestHandler = catchAsync(async (req, res) => {
+  const result = await BlogService.getAllBlogFromDB(req.query)
+  sendResponse(res, {
+    success: true,
+    data: result,
+    message: 'Successfully get all Blogs from database',
+    statusCode: httpStatus.FOUND,
+  })
+})
 const updateBlog: RequestHandler = catchAsync(async (req, res) => {
   const { id } = req.params
   checkGivenId(id)
@@ -52,6 +61,7 @@ const deleteBlog: RequestHandler = catchAsync(async (req, res) => {
 
 export const BlogController = {
   createBlog,
+  getAllBlogs,
   updateBlog,
   deleteBlog,
 }
