@@ -5,6 +5,7 @@ import { UserRoute } from './app/modules/user/user.route'
 import { BlogRoute } from './app/modules/blog/blog.route'
 import { AuthRoute } from './app/modules/auth/auth.route'
 import { AdminRoute } from './app/modules/admin/admin.route'
+import globalErrorHandler from './app/middlewares/globalErrorHandler'
 
 const app: Express = express()
 //parser
@@ -19,5 +20,6 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello From Blogging Web App😉')
 })
 
+app.use(globalErrorHandler)
 app.use(notFound)
 export default app

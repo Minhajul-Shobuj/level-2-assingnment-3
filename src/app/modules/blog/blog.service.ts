@@ -15,30 +15,7 @@ const createBlogInDB = async (payload: TBlog) => {
   return result
 }
 const getAllBlogFromDB = async (query: Record<string, unknown>) => {
-  // const queryObj = { ...query }
-  // let searchTerm = ''
   const searchableFields = ['title', 'content']
-  // if (query?.search) {
-  //   searchTerm = query?.search as string
-  // }
-  // const searchQuery = Blog.find({
-  //   $or: searchableFields.map(field => ({
-  //     [field]: { $regex: searchTerm, $options: 'i' },
-  //   })),
-  // })
-  // const excludeFields = ['search']
-  // excludeFields.forEach(el => delete queryObj[el])
-  // const filterQuery = searchQuery.find(queryObj).populate('author')
-
-  // let sort: string = '-createdAt'
-  // if (query?.sort) {
-  //   sort = query.sort as string
-  // }
-  // const sortQuery = await filterQuery.sort(sort)
-  // console.log(sortQuery)
-
-  // return sortQuery
-
   const blogQuery = new QueryBuilder(Blog.find(), query)
     .search(searchableFields)
     .filter()

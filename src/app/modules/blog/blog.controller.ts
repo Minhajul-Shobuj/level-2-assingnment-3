@@ -22,7 +22,7 @@ const getAllBlogs: RequestHandler = catchAsync(async (req, res) => {
     success: true,
     data: result,
     message: 'Successfully get all Blogs from database',
-    statusCode: httpStatus.FOUND,
+    statusCode: httpStatus.OK,
   })
 })
 const updateBlog: RequestHandler = catchAsync(async (req, res) => {
