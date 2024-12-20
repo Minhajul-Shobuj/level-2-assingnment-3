@@ -31,7 +31,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
       throw new AppError(httpStatus.FORBIDDEN, "User is Blocked");
     }
     req.user = decoded as JwtPayload;
-    console.log("req.user", req.user);
+    next();
   });
 };
 

@@ -14,7 +14,17 @@ const createUser: RequestHandler = catchAsync(async (req, res) => {
     message: "Successfully Registred an User😊",
   });
 });
-
+const blockUser: RequestHandler = catchAsync(async (req, res) => {
+  const { userId } = req.params;
+  const { isBlocked } = req.body;
+  await UserService.blockUserInDB(userId, isBlocked);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "User blocked successfully",
+  });
+});
 export const UserController = {
   createUser,
+  blockUser,
 };

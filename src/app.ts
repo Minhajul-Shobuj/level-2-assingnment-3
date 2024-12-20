@@ -13,8 +13,10 @@ app.use(cors());
 app.use("/api/auth", UserRoute);
 app.use("/api/auth", BlogRoute);
 app.use("/api/auth", AuthRoute);
+app.use("/api/admin/users", UserRoute);
+app.use("/api/admin/blogs", BlogRoute);
 app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
+  res.send("Hello From Blogging Web App😉");
 });
 
 app.use(notFound);

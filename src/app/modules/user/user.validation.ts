@@ -10,7 +10,12 @@ const userSchemaValidation = z.object({
     isBlocked: z.boolean().optional(),
   }),
 });
-
+const blockUserValidation = z.object({
+  body: z.object({
+    isBlocked: z.boolean(),
+  }),
+});
 export const UserValidation = {
   userSchemaValidation,
+  blockUserValidation,
 };

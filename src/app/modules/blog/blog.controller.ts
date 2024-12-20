@@ -13,7 +13,17 @@ const createBlog: RequestHandler = catchAsync(async (req, res) => {
     message: "Successfully Posted a Blog",
   });
 });
+const deleteBlog: RequestHandler = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await BlogService.deleteBlogFromDb(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Blog deleted successfully",
+  });
+});
 
 export const BlogController = {
   createBlog,
+  deleteBlog,
 };
