@@ -1,18 +1,18 @@
-import { model, Schema } from "mongoose";
-import { TBlog } from "./blog.interface";
+import { model, Schema } from 'mongoose'
+import { TBlog } from './blog.interface'
 
 const blogSchema = new Schema<TBlog>(
   {
     title: {
       type: String,
-      required: [true, "Title is required"],
+      required: [true, 'Title is required'],
       unique: true,
       trim: true,
-      minlength: [5, "Title must be at least 5 characters long"],
-      maxlength: [100, "Title cannot exceed 100 characters"],
+      minlength: [5, 'Title must be at least 5 characters long'],
+      maxlength: [100, 'Title cannot exceed 100 characters'],
       match: [
         /^[a-zA-Z0-9\s]+$/,
-        "Title can only contain letters, numbers, and spaces",
+        'Title can only contain letters, numbers, and spaces',
       ],
     },
     content: {
@@ -21,7 +21,7 @@ const blogSchema = new Schema<TBlog>(
     },
     author: {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
     },
     isPublished: {
@@ -31,7 +31,7 @@ const blogSchema = new Schema<TBlog>(
   },
   {
     timestamps: true,
-  }
-);
+  },
+)
 
-export const Blog = model<TBlog>("Blog", blogSchema);
+export const Blog = model<TBlog>('Blog', blogSchema)
