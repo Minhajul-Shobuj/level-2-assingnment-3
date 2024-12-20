@@ -12,16 +12,18 @@ const createBlogInDB = async (payload: TBlog) => {
   const result = (await Blog.create(payload)).populate("author");
   return result;
 };
-const updateBlogInDb = async (id: string, payload: Partial<TBlog>) => {};
-//----------
+const updateBlogInDb = async (
+  id: string,
+  payload: { title: string; content: string }
+) => {
+  const result = await Blog.findOneAndUpdate(
+    { _id: id },
+    { ...payload },
+    { new: true, runValidators: true }
+  );
+  return result;
+};
 const deleteBlogFromDb = async (id: string) => {
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    throw new Error("Invalid blog ID");
-  }
-  const blog = await Blog.findById(id);
-  if (!blog) {
-    throw new Error("Blog is already Deleted");
-  }
   const result = await Blog.findByIdAndDelete(id);
   return result;
 };

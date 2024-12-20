@@ -4,3 +4,6 @@
 4.FILTER
 
 script,validation,password hash,eslint,prettier
+warning in blog author email
+blog utiles
+set exact property for update

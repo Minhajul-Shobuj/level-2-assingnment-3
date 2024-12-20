@@ -8,7 +8,14 @@ const blogSchemaValidation = z.object({
     isPublished: z.boolean().optional(),
   }),
 });
+const updateBlogSchemaValidation = z.object({
+  body: z.object({
+    title: z.string().optional(),
+    content: z.string().optional(),
+  }),
+});
 
 export const BlogValidation = {
   blogSchemaValidation,
+  updateBlogSchemaValidation,
 };
