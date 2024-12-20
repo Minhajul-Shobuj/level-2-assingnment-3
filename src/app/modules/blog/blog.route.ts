@@ -9,13 +9,13 @@ const router = express.Router();
 
 router.post(
   "/",
-  auth(USER_ROLE.user, USER_ROLE.admin),
+  auth(USER_ROLE.user),
   validateRequest(BlogValidation.blogSchemaValidation),
   BlogController.createBlog
 );
 router.patch(
   "/:id",
-  auth(USER_ROLE.user, USER_ROLE.admin),
+  auth(USER_ROLE.user),
   validateRequest(BlogValidation.updateBlogSchemaValidation),
   BlogController.updateBlog
 );

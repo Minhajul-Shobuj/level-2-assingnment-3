@@ -12,7 +12,7 @@ const createBlog: RequestHandler = catchAsync(async (req, res) => {
   const result = await BlogService.createBlogInDB(req.body);
   sendResponse(res, {
     data: result,
-    statusCode: httpStatus.OK,
+    statusCode: httpStatus.CREATED,
     success: true,
     message: "Successfully Posted a Blog",
   });

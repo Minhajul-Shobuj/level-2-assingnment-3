@@ -10,8 +10,8 @@ const createUser: RequestHandler = catchAsync(async (req, res) => {
   sendResponse(res, {
     data: result,
     success: true,
-    statusCode: httpStatus.OK,
-    message: "Successfully Registred an User😊",
+    statusCode: httpStatus.CREATED,
+    message: "User registered successfully",
   });
 });
 

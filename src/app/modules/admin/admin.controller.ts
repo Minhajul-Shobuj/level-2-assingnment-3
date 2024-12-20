@@ -6,8 +6,7 @@ import httpStatus from "http-status";
 
 const blockUser: RequestHandler = catchAsync(async (req, res) => {
   const { userId } = req.params;
-  const { isBlocked } = req.body;
-  await AdminService.blockUserInDB(userId, isBlocked);
+  await AdminService.blockUserInDB(userId, req.body);
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,

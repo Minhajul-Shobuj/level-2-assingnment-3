@@ -1,14 +1,19 @@
 import mongoose from "mongoose";
 import { Blog } from "../blog/blog.model";
 import { User } from "../user/user.model";
+import { checkGivenId, validateAndFilterPayload } from "./admin.utiles";
 
-const blockUserInDB = async (userId: string, isBlocked: boolean) => {
-  if (!mongoose.Types.ObjectId.isValid(userId)) {
-    throw new Error("Invalid user ID");
-  }
+const blockUserInDB = async (
+  userId: string,
+  payload: { isBlocked: boolean }
+) => {
+  checkGivenId(userId);
+
+  const allowedFields = ["isBlocked"];
+  validateAndFilterPayload(payload, allowedFields);
   const result = await User.findOneAndUpdate(
     { _id: userId },
-    { isBlocked },
+    { ...payload },
     { new: true, runValidators: true }
   );
 
