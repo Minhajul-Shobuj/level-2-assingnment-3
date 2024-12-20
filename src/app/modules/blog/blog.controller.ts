@@ -6,6 +6,7 @@ import httpStatus from "http-status";
 import { Blog } from "./blog.model";
 import mongoose from "mongoose";
 import AppError from "../../errors/AppError";
+import { checkAuthorIsValid, checkGivenId, isBlogExist } from "./blog.utiles";
 
 const createBlog: RequestHandler = catchAsync(async (req, res) => {
   const result = await BlogService.createBlogInDB(req.body);
@@ -18,19 +19,12 @@ const createBlog: RequestHandler = catchAsync(async (req, res) => {
 });
 const updateBlog: RequestHandler = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const userEmail = req.user?.email;
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    throw new Error("Invalid blog ID");
-  }
+  checkGivenId(id);
+  await isBlogExist(id);
   const blog = await Blog.findById(id).populate("author");
-  if (!blog) {
-    throw new Error("Blog is already Deleted");
-  }
   const { email: authorEmail } = blog?.author;
-
-  if (userEmail !== authorEmail) {
-    throw new AppError(httpStatus.FORBIDDEN, "You are not authorized");
-  }
+  const userEmail = req.user?.email;
+  checkAuthorIsValid(userEmail, authorEmail);
 
   const result = await BlogService.updateBlogInDb(id, req.body);
   sendResponse(res, {
@@ -42,19 +36,12 @@ const updateBlog: RequestHandler = catchAsync(async (req, res) => {
 });
 const deleteBlog: RequestHandler = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const userEmail = req.user?.email;
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    throw new Error("Invalid blog ID");
-  }
+  checkGivenId(id);
+  await isBlogExist(id);
   const blog = await Blog.findById(id).populate("author");
-  if (!blog) {
-    throw new Error("Blog is already Deleted");
-  }
   const { email: authorEmail } = blog?.author;
-
-  if (userEmail !== authorEmail) {
-    throw new AppError(httpStatus.FORBIDDEN, "You are not authorized");
-  }
+  const userEmail = req.user?.email;
+  checkAuthorIsValid(userEmail, authorEmail);
 
   const result = await BlogService.deleteBlogFromDb(id);
   sendResponse(res, {

@@ -1,8 +1,9 @@
-import mongoose from "mongoose";
 import AppError from "../../errors/AppError";
 import { User } from "../user/user.model";
 import { TBlog } from "./blog.interface";
 import { Blog } from "./blog.model";
+import httpStatus from "http-status";
+import { validateAndFilterPayload } from "./blog.utiles";
 
 const createBlogInDB = async (payload: TBlog) => {
   const author = await User.isUserExistsById(payload?.author);
@@ -16,6 +17,9 @@ const updateBlogInDb = async (
   id: string,
   payload: { title: string; content: string }
 ) => {
+  const allowedFields = ["title", "content"];
+  validateAndFilterPayload(payload, allowedFields);
+
   const result = await Blog.findOneAndUpdate(
     { _id: id },
     { ...payload },
