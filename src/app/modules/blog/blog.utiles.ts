@@ -16,7 +16,7 @@ export const isBlogExist = async (id: string) => {
   }
 }
 export const checkRoleIsValid = (role: string) => {
-  if (role === 'user') {
+  if (role !== 'user') {
     throw new AppError(httpStatus.FORBIDDEN, 'You are not authorized')
   }
 }

@@ -3,7 +3,7 @@ import AppError from '../../errors/AppError'
 import httpStatus from 'http-status'
 
 export const checkRoleIsValid = (role: string) => {
-  if (role === 'admin') {
+  if (role !== 'admin') {
     throw new AppError(httpStatus.FORBIDDEN, 'You are not authorized')
   }
 }
