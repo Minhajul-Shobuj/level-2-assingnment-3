@@ -9,7 +9,13 @@ import { User } from '../modules/user/user.model'
 
 const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const token = await req.headers.authorization
+    const authHeader = req.headers.authorization
+
+    // Check if the authorization header exists and starts with "Bearer"
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized')
+    }
+    const token = authHeader.split(' ')[1]
     if (!token) {
       throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized')
     }
