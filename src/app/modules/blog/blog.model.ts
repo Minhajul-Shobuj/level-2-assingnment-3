@@ -6,7 +6,6 @@ const blogSchema = new Schema<TBlog>(
     title: {
       type: String,
       required: [true, 'Title is required'],
-      unique: true,
       trim: true,
       minlength: [5, 'Title must be at least 5 characters long'],
       maxlength: [100, 'Title cannot exceed 100 characters'],

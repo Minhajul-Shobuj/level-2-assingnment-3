@@ -19,7 +19,7 @@ const getAllBlogFromDB = async (query: Record<string, unknown>) => {
   const blogQuery = new QueryBuilder(Blog.find(), query)
     .search(searchableFields)
     .filter()
-  const result = await blogQuery.modelQuery
+  const result = await blogQuery.modelQuery.populate('author')
   return result
 }
 const updateBlogInDb = async (
