@@ -29,7 +29,7 @@ class QueryBuilder<T> {
     const queryObj = { ...this.query }
 
     // Filtering
-    const excludeFields = ['search', 'sort']
+    const excludeFields = ['search', 'sortBy']
 
     excludeFields.forEach(el => delete queryObj[el])
 
@@ -39,9 +39,9 @@ class QueryBuilder<T> {
   }
 
   sort() {
-    const sort =
+    const sortBy =
       (this?.query?.sort as string)?.split(',')?.join(' ') || '-createdAt'
-    this.modelQuery = this.modelQuery.sort(sort as string)
+    this.modelQuery = this.modelQuery.sort(sortBy as string)
 
     return this
   }
