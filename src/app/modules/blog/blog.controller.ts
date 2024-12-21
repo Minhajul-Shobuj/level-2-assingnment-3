@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unsafe-optional-chaining */
 import { RequestHandler } from 'express'
 import catchAsync from '../../utiles/catchAsync'
@@ -37,8 +38,9 @@ const updateBlog: RequestHandler = catchAsync(async (req, res) => {
   await isBlogExist(id)
   checkRoleIsValid(req.user?.role)
   const blog = await Blog.findById(id).populate('author')
-  const { email: authorEmail } = blog?.author
+  const { email: authorEmail } = blog?.author as any
   const userEmail = req.user?.email
+  console.log(authorEmail, userEmail)
   checkAuthorIsValid(userEmail, authorEmail)
 
   const result = await BlogService.updateBlogInDb(id, req.body)
@@ -55,10 +57,9 @@ const deleteBlog: RequestHandler = catchAsync(async (req, res) => {
   await isBlogExist(id)
   checkRoleIsValid(req.user?.role)
   const blog = await Blog.findById(id).populate('author')
-  const { email: authorEmail } = blog?.author
+  const { email: authorEmail } = blog?.author as any
   const userEmail = req.user?.email
   checkAuthorIsValid(userEmail, authorEmail)
-
   await BlogService.deleteBlogFromDb(id)
   sendResponse(res, {
     statusCode: httpStatus.OK,
