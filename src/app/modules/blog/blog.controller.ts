@@ -39,7 +39,6 @@ const updateBlog: RequestHandler = catchAsync(async (req, res) => {
   const blog = await Blog.findById(id).populate('author')
   const { email: authorEmail } = blog?.author as any
   const userEmail = req.user?.email
-  console.log(authorEmail, userEmail)
   checkAuthorIsValid(userEmail, authorEmail)
 
   const result = await BlogService.updateBlogInDb(id, req.body)
