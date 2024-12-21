@@ -1,4 +1,4 @@
-# 📚 Project Name
+# 📚 BlOGGING WEB APP
 
 _This is a backend application for Blog web app. The application is created using typescript, express, mongoose. Used MongoDb atlas for database. It has maximum number of crud operation that an Blog web application needed._
 
