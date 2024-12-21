@@ -11,9 +11,13 @@ import {
   checkRoleIsValid,
   isBlogExist,
 } from './blog.utiles'
+import { User } from '../user/user.model'
 
 const createBlog: RequestHandler = catchAsync(async (req, res) => {
+  const { author } = req.body
+  const user = await User.findById(author)
   checkRoleIsValid(req.user?.role)
+  checkAuthorIsValid(user?.email as string, req.user?.email)
   const result = await BlogService.createBlogInDB(req.body)
   sendResponse(res, {
     data: result,

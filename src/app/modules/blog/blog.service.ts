@@ -9,7 +9,7 @@ import QueryBuilder from '../../builder/QueryBuilder'
 const createBlogInDB = async (payload: TBlog) => {
   const author = await User.isUserExistsById(payload?.author)
   if (!author) {
-    throw new AppError(httpStatus.NOT_FOUND, 'Author is not valid')
+    throw new AppError(httpStatus.NOT_FOUND, 'Author ID is not valid')
   }
   const result = (await Blog.create(payload)).populate('author')
   return result
