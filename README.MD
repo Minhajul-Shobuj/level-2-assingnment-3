@@ -6,7 +6,7 @@ _This is a backend application for Blog web app. The application is created usin
 
 ## 🚀 Live Demo
 
-🌐 [Click here to view the live version](https://book-shop-steel.vercel.app/)
+🌐 [Click here to view the live version](https://assignment-3-six-psi.vercel.app/)
 
 ---
 
