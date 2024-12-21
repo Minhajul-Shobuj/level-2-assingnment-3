@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-unsafe-optional-chaining */
 import { RequestHandler } from 'express'
 import catchAsync from '../../utiles/catchAsync'
 import { BlogService } from './blog.service'
