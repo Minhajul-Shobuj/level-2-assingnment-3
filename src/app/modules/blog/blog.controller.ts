@@ -5,9 +5,15 @@ import { BlogService } from './blog.service'
 import sendResponse from '../../utiles/sendResponse'
 import httpStatus from 'http-status'
 import { Blog } from './blog.model'
-import { checkAuthorIsValid, checkGivenId, isBlogExist } from './blog.utiles'
+import {
+  checkAuthorIsValid,
+  checkGivenId,
+  checkRoleIsValid,
+  isBlogExist,
+} from './blog.utiles'
 
 const createBlog: RequestHandler = catchAsync(async (req, res) => {
+  checkRoleIsValid(req.user?.role)
   const result = await BlogService.createBlogInDB(req.body)
   sendResponse(res, {
     data: result,
@@ -29,6 +35,7 @@ const updateBlog: RequestHandler = catchAsync(async (req, res) => {
   const { id } = req.params
   checkGivenId(id)
   await isBlogExist(id)
+  checkRoleIsValid(req.user?.role)
   const blog = await Blog.findById(id).populate('author')
   const { email: authorEmail } = blog?.author
   const userEmail = req.user?.email
@@ -46,6 +53,7 @@ const deleteBlog: RequestHandler = catchAsync(async (req, res) => {
   const { id } = req.params
   checkGivenId(id)
   await isBlogExist(id)
+  checkRoleIsValid(req.user?.role)
   const blog = await Blog.findById(id).populate('author')
   const { email: authorEmail } = blog?.author
   const userEmail = req.user?.email

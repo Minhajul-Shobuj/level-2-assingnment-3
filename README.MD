@@ -50,7 +50,7 @@ Create a .env file in the root directory and add your environment variables:
 
 ```
 NODE_ENV=development
-PORT=5000
+PORT=3000
 MONGO_URI=your-mongodb-uri
 
 ```

@@ -15,6 +15,11 @@ export const isBlogExist = async (id: string) => {
     throw new Error('Blog is already Deleted')
   }
 }
+export const checkRoleIsValid = (role: string) => {
+  if (role === 'user') {
+    throw new AppError(httpStatus.FORBIDDEN, 'You are not authorized')
+  }
+}
 
 export const checkAuthorIsValid = (userEmail: string, authorEmail: string) => {
   if (userEmail !== authorEmail) {

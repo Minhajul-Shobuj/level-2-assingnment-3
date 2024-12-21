@@ -3,9 +3,13 @@ import catchAsync from '../../utiles/catchAsync'
 import sendResponse from '../../utiles/sendResponse'
 import { AdminService } from './admin.service'
 import httpStatus from 'http-status'
+import { checkGivenId, checkRoleIsValid } from './admin.utiles'
 
 const blockUser: RequestHandler = catchAsync(async (req, res) => {
   const { userId } = req.params
+  checkRoleIsValid(req.user?.role)
+  checkGivenId(userId)
+
   await AdminService.blockUserInDB(userId, req.body)
   sendResponse(res, {
     success: true,
@@ -16,6 +20,8 @@ const blockUser: RequestHandler = catchAsync(async (req, res) => {
 
 const deleteBlogByAdmin: RequestHandler = catchAsync(async (req, res) => {
   const { id } = req.params
+  checkRoleIsValid(req.user?.role)
+  checkGivenId(id)
   await AdminService.deleteBlogFromDb(id)
   sendResponse(res, {
     statusCode: httpStatus.OK,
