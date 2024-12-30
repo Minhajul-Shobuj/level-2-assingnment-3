@@ -7,7 +7,9 @@ const loginUser = catchAsync(async (req, res) => {
   const result = await AuthService.loginUser(req.body)
 
   sendResponse(res, {
-    data: result,
+    data: {
+      token: result,
+    },
     message: 'Login successful',
     success: true,
     statusCode: httpStatus.OK,

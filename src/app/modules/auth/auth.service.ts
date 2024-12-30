@@ -23,7 +23,7 @@ const loginUser = async (payload: TLoginUser) => {
   const accessToken = jwt.sign(jwtPayload, config.jwt_access_secret as string, {
     expiresIn: '10d',
   })
-  return `Bearer ${accessToken}`
+  return accessToken
 }
 
 export const AuthService = {
