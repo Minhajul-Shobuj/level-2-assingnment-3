@@ -1,15 +1,13 @@
-import AppError from '../../errors/AppError'
 import { User } from '../user/user.model'
 import { TBlog } from './blog.interface'
 import { Blog } from './blog.model'
-import httpStatus from 'http-status'
 import { validateAndFilterPayload } from './blog.utiles'
 import QueryBuilder from '../../builder/QueryBuilder'
 
-const createBlogInDB = async (payload: TBlog) => {
-  const author = await User.isUserExistsById(payload?.author)
-  if (!author) {
-    throw new AppError(httpStatus.NOT_FOUND, 'Author ID is not valid')
+const createBlogInDB = async (payload: TBlog, email: string) => {
+  const user = await User.findOne({ email })
+  if (user) {
+    payload.author = user?._id
   }
   const result = (await Blog.create(payload)).populate('author')
   return result

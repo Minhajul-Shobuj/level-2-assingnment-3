@@ -25,7 +25,7 @@ export const checkAuthorIsValid = (userEmail: string, authorEmail: string) => {
   if (userEmail !== authorEmail) {
     throw new AppError(
       httpStatus.FORBIDDEN,
-      'Authors cannot use others ID or cannot perform action to other blogs',
+      'YOU cannot perform action to others` blogs',
     )
   }
 }
