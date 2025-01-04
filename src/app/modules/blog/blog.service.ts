@@ -31,7 +31,7 @@ const updateBlogInDb = async (
     { _id: id },
     { ...payload },
     { new: true, runValidators: true },
-  )
+  ).populate('author')
   return result
 }
 const deleteBlogFromDb = async (id: string) => {
