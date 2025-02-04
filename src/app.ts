@@ -17,11 +17,10 @@ app.use(cookieParser())
 
 app.use(
   cors({
-    origin: ['http://localhost:5173/'],
+    origin: ['https://book-lover-front-end.vercel.app'],
     credentials: true,
   }),
 )
-//https://book-lover-front-end.vercel.app
 
 app.use('/api/auth', UserRoute)
 app.use('/api/blogs', BlogRoute)
