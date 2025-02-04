@@ -13,7 +13,7 @@ _This is a backend application for Blog web app. The application is created usin
 ## ✨ Features
 
 ✅ **Feature 1**: Can register user using their necessery document.  
-✅ **Feature 2**: After register and login user can post blog, update and delete.
+✅ **Feature 2**: After register and login user can place order for buying book, see their dashboard, update password
 ✅ **Feature 3**: Admin can make any user blocked and can delete any blog.
 
 ---
@@ -83,18 +83,14 @@ npm start
 
 1. POST /api/auth/register: Register User.
 2. POST /api/auth/login: Login User.
-3. POST /api/blogs: Create Blog.
-4. PATCH /api/blogs/:id: Update Blog.
-5. DELETE /api/blogs/:id: Delete Blog.
 
 👮 Admin
 
-6. PATCH /api/admin/users/:userId/block: Block User.
-7. DELETE /api/admin/blogs/:id: Delete Blog
+3. PATCH /api/admin/users/:userId/block: Block User.
 
 🫂 Public
 
-8. GET /api/blogs: Get All Blogs (Public)
+8. GET /api/books: Get All Books (Public)
 
 🔧 Scripts
 
