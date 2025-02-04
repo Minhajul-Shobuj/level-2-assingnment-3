@@ -10,7 +10,7 @@ const blockUser: RequestHandler = catchAsync(async (req, res) => {
   checkRoleIsValid(req.user?.role)
   checkGivenId(userId)
 
-  await AdminService.blockUserInDB(userId, req.body)
+  await AdminService.blockUserInDB(userId)
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,

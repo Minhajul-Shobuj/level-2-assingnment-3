@@ -33,6 +33,9 @@ const userSchema = new Schema<TUser, UserModel>(
       enum: userRole,
       default: 'user',
     },
+    passwordChangedAt: {
+      type: Date,
+    },
   },
   {
     timestamps: true,

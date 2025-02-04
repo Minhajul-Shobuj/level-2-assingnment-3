@@ -1,20 +1,14 @@
 import { Blog } from '../blog/blog.model'
 import { User } from '../user/user.model'
-import { validateAndFilterPayload } from './admin.utiles'
 
-const blockUserInDB = async (
-  userId: string,
-  payload: { isBlocked: boolean },
-) => {
+const blockUserInDB = async (userId: string) => {
   const user = await User.findById(userId)
   if (!user) {
     throw new Error('User not Found')
   }
-  const allowedFields = ['isBlocked']
-  validateAndFilterPayload(payload, allowedFields)
   const result = await User.findOneAndUpdate(
     { _id: userId },
-    { ...payload },
+    { isBlocked: true },
     { new: true, runValidators: true },
   )
 
