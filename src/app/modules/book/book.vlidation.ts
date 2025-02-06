@@ -8,6 +8,7 @@ const bookSchemaValidation = z.object({
     price: z.number(),
     stock: z.number(),
     description: z.string(),
+    bookImg: z.string(),
   }),
 })
 const updateBookSchemaValidation = z.object({

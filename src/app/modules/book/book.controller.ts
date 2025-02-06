@@ -6,7 +6,7 @@ import { BookService } from './book.service'
 import { checkGivenId } from '../admin/admin.utiles'
 
 const createBook: RequestHandler = catchAsync(async (req, res) => {
-  const result = await BookService.createBookInDB(req.file, req.body)
+  const result = await BookService.createBookInDB(req.body)
 
   sendResponse(res, {
     data: result,

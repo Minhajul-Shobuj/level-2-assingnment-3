@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from 'express'
+import express from 'express'
 import validateRequest from '../../middlewares/validateRequest'
 import { USER_ROLE } from '../user/user.constant'
 import auth from '../../middlewares/auth'
@@ -6,7 +6,6 @@ import { AdminController } from './admin.controller'
 import { BookValidation } from '../book/book.vlidation'
 import { BookController } from '../book/book.controller'
 import { UserController } from '../user/user.controller'
-import { upload } from '../../utiles/sendImageToCloudinary'
 import { OrderController } from '../orders/order.controller'
 import { Ordervalidation } from '../orders/order.validation'
 
@@ -28,11 +27,6 @@ router.delete(
 router.post(
   '/create-book',
   auth(USER_ROLE.admin),
-  upload.single('file'),
-  (req: Request, res: Response, next: NextFunction) => {
-    req.body = JSON.parse(req.body.data)
-    next()
-  },
   validateRequest(BookValidation.bookSchemaValidation),
   BookController.createBook,
 )

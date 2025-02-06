@@ -1,20 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import QueryBuilder from '../../builder/QueryBuilder'
 import AppError from '../../errors/AppError'
-import { sendImageToCloudinary } from '../../utiles/sendImageToCloudinary'
 import { TBook } from './book.interface'
 import { Book } from './book.model'
 import httpStatus from 'http-status'
 
-const createBookInDB = async (file: any, payload: TBook) => {
-  if (file) {
-    const imageName = `${payload.title}`
-    const path = file?.path
-
-    //send image to cloudinary
-    const { secure_url } = await sendImageToCloudinary(imageName, path)
-    payload.bookImg = secure_url as string
-  }
+const createBookInDB = async (payload: TBook) => {
   const result = await Book.create(payload)
   return result
 }
