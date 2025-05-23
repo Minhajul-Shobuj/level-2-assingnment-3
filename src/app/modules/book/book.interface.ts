@@ -6,4 +6,5 @@ export type TBook = {
   price: number
   stock: number
   description: string
+  category: string
 }

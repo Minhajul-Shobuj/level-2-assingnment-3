@@ -18,6 +18,11 @@ const bookSchema = new Schema<TBook>(
       minlength: [7, 'Author can not be less than 7 characters'],
       maxlength: [30, 'Author can not be more than 30 characters'],
     },
+    category: {
+      type: String,
+      required: [true, 'Category is required'],
+      trim: true,
+    },
     bookImg: {
       type: String,
       required: true,

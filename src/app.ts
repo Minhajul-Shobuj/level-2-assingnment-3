@@ -9,6 +9,8 @@ import { AdminRoute } from './app/modules/admin/admin.route'
 import globalErrorHandler from './app/middlewares/globalErrorHandler'
 import { BookRoute } from './app/modules/book/book.route'
 import { OrderRoute } from './app/modules/orders/order.route'
+import { CategoryRoute } from './app/modules/categories/catories.route'
+import { SubscribeRoute } from './app/modules/subscribe/subscribe.route'
 
 const app: Express = express()
 //parser
@@ -17,7 +19,7 @@ app.use(cookieParser())
 
 app.use(
   cors({
-    origin: ['https://book-lover-front-end.vercel.app'],
+    origin: ['http://localhost:5173'],
     credentials: true,
   }),
 )
@@ -25,9 +27,11 @@ app.use(
 app.use('/api/auth', UserRoute)
 app.use('/api/blogs', BlogRoute)
 app.use('/api/books', BookRoute)
+app.use('/api/categories', CategoryRoute)
 app.use('/api/auth', AuthRoute)
 app.use('/api/admin', AdminRoute)
 app.use('/api/orders', OrderRoute)
+app.use('/api/subscribe', SubscribeRoute)
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello From BookLover Web App😉')
 })

@@ -4,6 +4,7 @@ const bookSchemaValidation = z.object({
   body: z.object({
     title: z.string(),
     author: z.string(),
+    category: z.string(),
     publishedDate: z.string(),
     price: z.number(),
     stock: z.number(),

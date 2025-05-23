@@ -8,6 +8,8 @@ import { BookController } from '../book/book.controller'
 import { UserController } from '../user/user.controller'
 import { OrderController } from '../orders/order.controller'
 import { Ordervalidation } from '../orders/order.validation'
+import { CategoryValidation } from '../categories/categories.validation'
+import { CategoryController } from '../categories/categories.controller'
 
 const router = express.Router()
 
@@ -44,6 +46,13 @@ router.patch(
   auth(USER_ROLE.admin),
   validateRequest(Ordervalidation.updateOrderStatusValidationSchema),
   OrderController.updateOrderStaus,
+)
+
+router.post(
+  '/create-category',
+  auth(USER_ROLE.admin),
+  validateRequest(CategoryValidation.catogorySchemaValidation),
+  CategoryController.createCategory,
 )
 
 export const AdminRoute = router

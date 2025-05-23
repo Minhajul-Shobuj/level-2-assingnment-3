@@ -9,7 +9,7 @@ const createBookInDB = async (payload: TBook) => {
   return result
 }
 const getAllBookFromDB = async (query: Record<string, unknown>) => {
-  const searchableFields = ['title', 'author']
+  const searchableFields = ['title', 'author', 'category']
   const bookQuery = new QueryBuilder(Book.find(), query)
     .search(searchableFields)
     .filter()
